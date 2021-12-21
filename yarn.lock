@@ -177,6 +177,21 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.2.tgz#a4c07d47ff737e8ee7e586fe636ff0e1ddff070a"
   integrity sha512-JepeIUPFDARgIs0zD/SKPgFsJEAF0X5/qO80llx59gOxFTboS9Amv3S+QfB7lqBId5sFXJ99BN0J6zFRvL9dDA==
 
+"@types/pdfkit@*":
+  version "0.12.3"
+  resolved "https://registry.yarnpkg.com/@types/pdfkit/-/pdfkit-0.12.3.tgz#cc433ab2a6feedd518eed55dd9a621c8433e6268"
+  integrity sha512-c19Izds2F/eks/c/YXl0Gtov/rkcmazNVQHKmYn+b6kpqry4jwQnvZ/dFo39l83Fuxb2yRw3Ha/CzH3GaB6zWQ==
+  dependencies:
+    "@types/node" "*"
+
+"@types/pdfmake@^0.1.19":
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/@types/pdfmake/-/pdfmake-0.1.19.tgz#d0b9fbf87777ccb56701995d62edeb9b37d52579"
+  integrity sha512-wcz8QeFUP8VWPwLjWDKX9pp3HcamdQd94vSdK2jHqz/U/srCNQAmhcLSAybuUqwemDKncMnhLTjQq5gjrfc7Yg==
+  dependencies:
+    "@types/node" "*"
+    "@types/pdfkit" "*"
+
 "@types/qs@*":
   version "6.9.7"
   resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.7.tgz#63bb7d067db107cc1e457c303bc25d511febf6cb"
