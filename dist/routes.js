@@ -20,30 +20,50 @@ routes.get("/products", (req, res) => {
     products_1.products.findAll().then((d) => res.send(d));
 });
 routes.get("/products/report", (req, res) => {
-    const printer = new pdfmake_1.default(fonts);
-    //Definicoes do documentos
-    const docDefinitions = {
-        defaultStyle: { font: "Helvetica" },
-        content: [
-            {
-                text: "Meu primeiro relatorio do Code Drops"
-            }
-        ]
-    };
-    //Passar a definicao do relatorio
-    const pdfDoc = printer.createPdfKitDocument(docDefinitions);
-    //Move o conteudo para um local definido no fs
-    pdfDoc.pipe(fs_1.default.createWriteStream("Relatorio.pdf"));
-    const chunks = [];
-    //trabalhando com o conteudo do relatio
-    //pegando pedacos do relatorio
-    pdfDoc.on("data", (chunk) => {
-        chunks.push(chunk);
-    });
-    pdfDoc.end();
-    pdfDoc.on("end", () => {
-        const result = Buffer.concat(chunks);
-        res.end(result);
-    });
+    try {
+        const printer = new pdfmake_1.default(fonts);
+        const body = [];
+        for (let product of products_1.products.values()) {
+            const rows = new Array();
+            rows.push(product.dataValues.id);
+            rows.push(product.dataValues.nome);
+            rows.push(product.dataValues.description);
+            rows.push(product.dataValues.price);
+            rows.push(product.dataValues.quantity);
+            body.push(rows);
+        }
+        //Definicoes do documentos
+        const docDefinitions = {
+            defaultStyle: { font: "Helvetica" },
+            content: [
+                {
+                    table: {
+                        body: [
+                            ["ID", "Nome", "Descricao", "Preco", "Quantidade"],
+                            ...body
+                        ]
+                    }
+                }
+            ]
+        };
+        //Passar a definicao do relatorio
+        const pdfDoc = printer.createPdfKitDocument(docDefinitions);
+        //Move o conteudo para um local definido no fs
+        pdfDoc.pipe(fs_1.default.createWriteStream("Relatorio.pdf"));
+        const chunks = [];
+        //trabalhando com o conteudo do relatio
+        //pegando pedacos do relatorio
+        pdfDoc.on("data", (chunk) => {
+            chunks.push(chunk);
+        });
+        pdfDoc.end();
+        pdfDoc.on("end", () => {
+            const result = Buffer.concat(chunks);
+            res.end(result);
+        });
+    }
+    catch (error) {
+        throw error;
+    }
 });
 exports.default = routes;
