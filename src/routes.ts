@@ -50,7 +50,6 @@ routes.get("/products/report", (req: Request, res: Response)=>{
         }
         //Definicoes do documentos
         const DataH = new Date()
-        const Time = Date.parse(`${DataH}`)
         const docDefinitions: TDocumentDefinitions = {
             defaultStyle: {font: "Helvetica"},
             content: [
