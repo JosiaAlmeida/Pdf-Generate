@@ -5,8 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const routes_1 = __importDefault(require("./routes"));
+const body_parser_1 = __importDefault(require("body-parser"));
 const app = (0, express_1.default)();
 app.use((req, res, next) => next());
+app.use(body_parser_1.default.json());
+app.use(body_parser_1.default.urlencoded({ extended: false }));
 app.use(routes_1.default);
 app.get('/', (req, res, next) => res.send("Rota funcionando"));
 app.listen(3001, () => console.log("Server is running on port 3001"));
